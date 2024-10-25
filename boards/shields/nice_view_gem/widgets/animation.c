@@ -25,9 +25,9 @@ const lv_img_dsc_t *anim_imgs[] = {
     &crystal_13, &crystal_14, &crystal_15, &crystal_16,
 };
 
-void draw_animation(lv_obj_t *canvas, struct zmk_widget_screen *widget) {
+void draw_animation(lv_obj_t *canvas) {
 #if IS_ENABLED(CONFIG_NICE_VIEW_GEM_ANIMATION)
-    lv_obj_t *art = lv_animimg_create(widget->obj);
+    lv_obj_t *art = lv_animimg_create(canvas);
     lv_obj_center(art);
 
     lv_animimg_set_src(art, (const void **)anim_imgs, 16);
@@ -35,7 +35,7 @@ void draw_animation(lv_obj_t *canvas, struct zmk_widget_screen *widget) {
     lv_animimg_set_repeat_count(art, LV_ANIM_REPEAT_INFINITE);
     lv_animimg_start(art);
 #else
-    lv_obj_t *art = lv_img_create(widget->obj);
+    lv_obj_t *art = lv_img_create(canvas);
 
     int length = sizeof(anim_imgs) / sizeof(anim_imgs[0]);
     srand(k_uptime_get_32());
